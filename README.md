@@ -1,22 +1,22 @@
 ```sql
-
 DECLARE
-    x number;
-    y number;
-    z number;
-    FUNCTION powerFind(x IN number, y IN number)
-    RETURN number 
-    IS
-        z number;
+    department employee.dept%TYPE;
+    max_salary number;
+    PROCEDURE display_dept(x IN employee.dept%TYPE, y OUT number) IS
     BEGIN
-        z := POWER(x, y);
-        RETURN z;
+        y := 0;
+        FOR items in (SELECT Name, Salary FROM Employee WHERE dept = x)
+        LOOP
+            y := y + items.Salary;
+            dbms_output.put_line(items.Name || ' ' || items.Salary);
+        END LOOP;
     END;
 BEGIN
-    x := 2;
-    y := 3;
-    z := powerFind(x, y);
-    dbms_output.put_line(x || '^' || y || ' = ' || z);
+    department := 'Accounts';
+    display_dept(department, max_salary);
+    dbms_output.put_line('Total Salary in ' || department || ' = ' || max_salary);
 END;
 /
+
+
 ```
