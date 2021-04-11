@@ -1,18 +1,24 @@
 ```sql
 DECLARE
-    table_of number;
-    table_till number;
-    PROCEDURE multi_table(x IN number, y IN number) IS
+    department employee.dept%TYPE;
+    max_salary number;
+    PROCEDURE display_dept(x IN employee.dept%TYPE, y OUT number) IS
     BEGIN
-        FOR i in 1..y
+        y := 0;
+        FOR items in (SELECT Name, Salary FROM Employee WHERE dept = x)
         LOOP
-            dbms_output.put_line(x || ' x ' || i || ' = ' || x*i);
+            if(items.Salary > y) then
+                y := items.Salary;
+            end if;
+            dbms_output.put_line(items.Name || ' ' || items.Salary);
         END LOOP;
     END;
 BEGIN
-    table_of := 2;
-    table_till := 8;
-    multi_table(table_of, table_till);
+    department := 'Accounts';
+    display_dept(department, max_salary);
+    dbms_output.put_line('Max. Salary in ' || department || ' ' || max_salary);
 END;
 /
+    
+
 ```
