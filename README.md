@@ -1,5 +1,3 @@
-# markdownfiles
-
 ```sql
 DECLARE
     CURSOR items
