@@ -1,16 +1,18 @@
 ```sql
 
+CREATE OR REPLACE TRIGGER date_entry
+BEFORE INSERT OR UPDATE ON Employee
+FOR EACH ROW
+DECLARE
+    date_error EXCEPTION;
 BEGIN
-    INSERT into Employee values(1, 'Harris', 'Manager', 10, '', 2000);
-    INSERT into Employee values(2, 'Jason', 'Assistant', 20, '', 2000);
-    INSERT into Employee values(3, 'Mitchel', 'Senior Assistant', 30, '', 2000);
-    INSERT into Employee values(4, 'Lebron', 'President', 40, '', 2000);
-    INSERT into Employee values(5, 'Kevin', 'Sanitary Officer', 10, '', 2000);
-    INSERT into Employee values(6, 'Anthony', 'Manager', 20, '', 2000);
-    INSERT into Employee values(7, 'Luka', 'Assistant', 30, '', 2000);
-    INSERT into Employee values(8, 'Stephen', 'Deputy Manager', 40, '', 2000);
+    if(:NEW.DOJ < current_date()) then
+        RAISE date_error;
+    end if;
+EXCEPTION
+    WHEN date_error THEN
+        dbms_output.put_line('ERROR IN DATE');
 END;
 /
-Select * from Employee;
 
 ```
