@@ -1,11 +1,16 @@
 ```sql
 
-INSERT INTO Employee values(11, 'Alok', 'Assistant', 20, '', 1200, '01-MAY-2021');
-INSERT INTO Employee values(12, 'Satish', 'Manager', 30, '', 1700, '01-JUN-2021');
-INSERT INTO Employee values(13, 'Ajay', 'Senior President', 1050, '', 1200, '01-DEC-2021');
-INSERT INTO Employee values(14, 'Devendra', 'GM', 40, '', 2500, '01-JUNE-2022');
-INSERT INTO Employee values(15, 'Manish', 'CEO', 10, '', 1500, '01-JAN-2021');
+CREATE OR REPLACE TRIGGER row_inserted
+BEFORE INSERT ON Employee
+FOR EACH ROW
 
-Select * from Employee;
+BEGIN
+    dbms_output.put_line('ROW INSERTION TRIGGER FIRED');
+END;
+
+INSERT INTO Employee values(21, 'Mick', 'Assistant', 40, '', 1200, '01-MAY-2021');
+INSERT INTO Employee values(22, 'Daniel', 'Manager', 10, '', 1700, '01-JUN-2021');
+INSERT INTO Employee values(23, 'Lewis', 'Senior President', 20, '', 1200, '01-DEC-2021');
+
 
 ```
