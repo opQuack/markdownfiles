@@ -1,22 +1,35 @@
 ```sql
+
+Create TABLE Employee(
+    ID int,
+    Name varchar(25),
+    Job varchar(25),
+    DeptNo int,
+    DeptName varchar(25),
+    Salary decimal(7,2),
+    primary key (ID)
+);
+
 DECLARE
-    department employee.dept%TYPE;
-    max_salary number;
-    PROCEDURE display_dept(x IN employee.dept%TYPE, y OUT number) IS
+    FUNCTION dept_name(x IN number)
+    RETURN employee.DeptName%TYPE
+    IS
+        z employee.DeptName%TYPE;
     BEGIN
-        y := 0;
-        FOR items in (SELECT Name, Salary FROM Employee WHERE dept = x)
-        LOOP
-            y := y + items.Salary;
-            dbms_output.put_line(items.Name || ' ' || items.Salary);
-        END LOOP;
+        if( x = 10 ) then
+            z := 'Accounts';
+        elsif( x = 20  ) then
+            z := 'R&D';
+        elsif( x = 30 ) then
+            z := 'HR';
+        elsif( x = 40 ) then
+            z := 'Engineering';
+        end if;
+        RETURN z;
     END;
 BEGIN
-    department := 'Accounts';
-    display_dept(department, max_salary);
-    dbms_output.put_line('Total Salary in ' || department || ' = ' || max_salary);
+    dbms_output.put_line('Function Created');
 END;
 /
-
 
 ```
