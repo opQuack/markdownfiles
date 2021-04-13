@@ -1,52 +1,43 @@
 ```java
 
 import java.awt.*;
+import java.applet.*;
 
-import javax.swing.JLabel;
+public class Applet2 extends Applet implements ActionListener{
+    JLabel title, Team1, Team2, Players1, Players2, Players3;
 
-import java.applet.Applet.*;
-
-public class Applet1 extends Applet {
-    Image p1, p2, p3;
-    JLabel info1, info2, info3;
-    private static final long serialVersionUID = 1L;
     public void init(){
-        add(info1);
-        add(info2);
-        add(info3);
-        info1.setBounds(10, 50, 50, 50);
-        info2.setBounds(100, 50, 50, 50);
-        info3.setBounds(200, 50, 50, 50);
-        info1 = new JLabel("Smiling Face 1");
-        info2 = new JLabel("Smiling Face 2");
-        info3 = new JLabel("Smiling Face 3");
-        p1 = getImage(getDocumentBase(), "smilingface1.jpg");
-        p2 = getImage(getDocumentBase(), "smilingface2.jpg");
-        p3 = getImage(getDocumentBase(), "smilingface3.jpg");
-        p1.addActionListener(new ActionListener(){
-            info1.setVisible(true);
-            info2.setVisible(false);
-            info3.setVisible(false);
-        });
-        p2.addActionListener(new ActionListener(){
-            info1.setVisible(false);
-            info2.setVisible(false);
-            info3.setVisible(true);
-        });
-        p2.addActionListener(new ActionListener(){
-            info1.setVisible(false);
-            info2.setVisible(true);
-            ino3.setVisible(false);
-        });   
-        setLayout(null);
+        title = new JLabel("IPL Teams");
+        Team1 = new JLabel("Bangalore");
+        Team2 = new JLabel("Mumbai");
+        Team3 = new JLabel("Delhi");
+        Players1 = new JLabel("1. PA\n2. PB\n2. PC\n2. PD\n2. PE\n2. PF\n2. PG");
+        Players2 = new JLabel("1. PA\n2. PB\n2. PC\n2. PD\n2. PE\n2. PF\n2. PG");
+        Players3 = new JLabel("1. PA\n2. PB\n2. PC\n2. PD\n2. PE\n2. PF\n2. PG");
+        title.setBounds(10, 10, 100, 100);
+        Team1.setBounds(100, 10, 100, 100);
+        Team1.setBounds(300, 10, 100, 100);
+        Team1.setBounds(500, 10, 100, 100);
+        add(title);
+        add(Team1);
+        add(Team2);
+        add(Team3);
+        add(Players1);
+        add(Players2);
+        add(Players3);
     }
 
-    public void paint(Graphics g){
-        g.drawImage(p1,10, 10, this);
-        g.drawImage(p2,10, 10, this);
-        g.drawImage(p3,10, 10, this);
+    public void paint(Graphics G){
+        g.drawRectangle(0, 0, 100, 100);
+        g.setColor(Color.GREEN);
+        g.drawRectangle(0, 100, 100, 100);
+        g.setColor(Color.RED);
+        g.drawRectangle(0, 100, 200, 100);
+        g.setColor(Color.BLUE);
+        g.drawRectangle(0, 100, 300, 100);
+        g.setColor(Color.ORANGE);
     }
+
 }
-
 
 ```
