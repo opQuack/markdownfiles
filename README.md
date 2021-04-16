@@ -14,3 +14,10 @@ from Programmer
 where DOJ = (Select min(DOJ) from Programmer NATURAL JOIN Studies where Institute = 'BDPS'))
 GROUP BY PName;
 ```
+
+103
+```sql
+Select count(*)
+from Programmer NATURAL JOIN Software
+where Salary > (Select max(Salary) from Programmer where Sex = 'M') and Sex = 'F';
+```
