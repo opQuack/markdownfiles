@@ -143,7 +143,7 @@ where C.BookId = B.BookId and B.BookId = A.BookId and Author_name = 'Stephen Kin
 
 
 QUESTION 2
-
+```sql
 TABLE CREATIONS
 
 Create table Employee(
