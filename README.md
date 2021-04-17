@@ -84,6 +84,9 @@ INSERT INTO Book_Loans VALUES(2,2,3,'04-FEB-1987','12-JUNE-1987');
 INSERT INTO Book_Loans VALUES(2,1,2,'12-JAN-1986','04-FEB-1986');
 INSERT INTO Book_Loans VALUES(3,1,1,'10-DEC-1985','04-JAN-1986');
 INSERT INTO Book_Loans VALUES(2,1,4,'06-NOV-1987','12-NOV-1987');
+INSERT INTO Book_Loans VALUES(2,1,1,'10-APR-21','17-APR-21');
+INSERT INTO Book_Loans VALUES(1,3,1,'11-APR-21','17-APR-21');
+INSERT INTO Book_Loans VALUES(3,2,1,'12-APR-21','17-APR-21');
 
 INSERT INTO Library_Branch VALUES(1,'A1Town','Mumbai');
 INSERT INTO Library_Branch VALUES(2,'Central','Delhi');
@@ -98,4 +101,42 @@ INSERT INTO Borrower VALUES(4,'Jeet','Mumbai','28192129');
 INSERT INTO Borrower VALUES(5,'Priya','Delhi','2819273');
 INSERT INTO Borrower VALUES(6,'Geeta','Mumbai','28192871');
 
+```
+
+```sql
+1
+Select No_of_Copies
+from Library_Branch L, Book_Copies C, Book B
+where L.BranchId = C.BranchId and C.BookId = B.BookId and Title = 'The Lost Tribe' and BranchName = 'A1Town';
+
+2
+Select BranchId, No_of_copies
+from Book_Copies NATURAL JOIN Book
+where Title = 'The Lost Tribe';
+
+3
+Select Name
+from Borrower
+where CardNo not in (Select distinct(CardNo) from Book_Loans);
+
+4
+Select Title, Name, Addrs
+from Library_Branch L, Book_Loans BL, Borrower B, Book BO
+where L.BranchId = BL.BranchId and BL.CardNo = B.CardNo and BL.BookId = BO.BookID and L.BranchName = 'A1Town' and DueDate = CURDATE();
+
+5
+Select BranchName, count(*)
+from Book_Loans NATURAL JOIN Library_Branch
+GROUP BY BranchName;
+
+6
+Select Name, Addrs, count(*)
+from Book_Loans NATURAL JOIN Borrower
+where count(*) > 5
+group by CardNo;
+
+7
+Select Title, No_of_Copies
+from Book_Copies C, Book B, Book_Authors A, Library_Branch L
+where C.BookId = B.BookId and B.BookId = A.BookId and Author_name = 'Stephen King' and L.BranchId = C.BranchId and BranchName = 'Central';
 ```
