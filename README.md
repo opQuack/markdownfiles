@@ -140,3 +140,56 @@ Select Title, No_of_Copies
 from Book_Copies C, Book B, Book_Authors A, Library_Branch L
 where C.BookId = B.BookId and B.BookId = A.BookId and Author_name = 'Stephen King' and L.BranchId = C.BranchId and BranchName = 'Central';
 ```
+
+
+QUESTION 2
+
+Create table Employee(
+	FName varchar(50),
+	MINIT int,
+	LName varchar(50),
+	SSN int PRIMARY KEY,
+	BDate date,
+	Address varchar(50),
+	SEX char(1),
+	Salary int,
+	SuperSSN int,
+	DNO int
+);
+
+Create Table Department(
+	DName varchar(25),
+	DNumber int PRIMARY KEY,
+	MGRSSN int,
+	MGRSTARDATE date
+);
+
+Create Table Dept_Locations(
+	DNumber int,
+	DLocation varchar(25),
+	PRIMARY KEY(DNumber, DLocation)
+);
+
+Create Table Project(
+	PName varchar(25),
+	PNumber int PRIMARY KEY,
+	PLocation varchar(25),
+	DNum int
+);
+
+Create Table Works_On(
+	ESSN int,
+	PNo int,
+	Hours int,
+	PRIMARY KEY(ESSN, PNo)
+);
+
+Create Table DEPENDENT(
+	ESSN int,
+	Dependent_Name varchar(25),
+	SEX char(1),
+	BDate date,
+	Relationship varchar(25)
+);
+```
+
