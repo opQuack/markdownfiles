@@ -144,6 +144,8 @@ where C.BookId = B.BookId and B.BookId = A.BookId and Author_name = 'Stephen Kin
 
 QUESTION 2
 
+TABLE CREATIONS
+
 Create table Employee(
 	FName varchar(50),
 	MINIT int,
@@ -191,5 +193,47 @@ Create Table DEPENDENT(
 	BDate date,
 	Relationship varchar(25)
 );
+
+1.
+Select FName
+from Employee E, Works_On W, Project P
+where E.SSN = W.ESSN and P.PNumber = W.PNO and Hours > 10 and PName = 'ProductX';
+
+2.
+Select sum(HOURS)
+where P.PNumber = W.PNO
+group by PName;
+
+3.
+Select FName
+from Employee
+where SSN in (Select ESSN from WORKS_ON group by PNo having count(*) = (Select count(*) from Project));
+
+4.
+Select FName
+from Employee
+where SSN not in (Select distinct(ESSN) from Project P, Works_on W where P.PNumber = W.PNo);
+
+5.
+Select FName, Address
+from Employee E, Dept_Location D, Project P, Works_On W
+where E.DNo = D.Dnumber and E.SSN = W.ESSN and P.Pnumber = W.PNo and PLocation = 'Houston' and DLocation NOT LIKE 'Houston';
+
+6.
+Select LName
+from Employee E
+where SSN not in (Select distinct(ESSN) from Dependent);
+
+7.
+Select *
+from Employee
+where Salary > (Select AVG(Salary) from Employee)
+ORDER BY Salary DESC;
+
+8.
+Select *
+from Employee NATURAL JOIN (Select AVG(Salary) from Employee group by DNO)
+where Salary > AVG(Salary)
+ORDER BY Salary DESC;
 ```
 
