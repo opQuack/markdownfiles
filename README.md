@@ -1,7 +1,7 @@
 # DBMS Assignment 5
 
 ### Table Creation Commands
-```
+```sql
 Create table student(
     id INTEGER PRIMARY KEY,
     first_name varchar(15),
@@ -39,7 +39,7 @@ Insert into instructor values( 4 ,' Susi ',' Jiroutka ',' 2 ' );
 ## Queries
 
 ### Question 1
-```
+```sql
 create or replace package school_api is
     procedure get_address(table_name IN varchar, lookup student.id%type);
     procedure instructor_status;
