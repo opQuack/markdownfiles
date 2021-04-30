@@ -67,5 +67,11 @@ create or replace package body school_api is
     end instructor_status;
 end school_api;
 /
+
+BEGIN
+    school_api.get_address('student', 2);
+    school_api.instructor_status;
+END;
+/
 ```
 
