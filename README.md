@@ -75,3 +75,49 @@ END;
 /
 ```
 
+## Question2
+```sql
+create or replace package school_api is
+    count_helper NUMBER;
+    procedure get_address(table_name IN varchar, lookup student.id%type);
+    procedure instructor_status;
+    procedure remove_student(lookup student.id%type);
+end school_api;
+/
+
+create or replace package body school_api is
+    procedure get_address(table_name IN varchar, lookup student.id%type) is
+    begin
+        for person in (Select * from student where id = lookup)
+        loop
+            dbms_output.put_line(person.first_name || ' ' || person.last_name || ' ' || person.street || ' ' || person.city || ' ' || person.state || ' ' || person.zipcode);
+        end loop;
+    end get_address;
+    procedure instructor_status is
+    begin
+        for person in (Select * from instructor)
+        loop
+            if (person.sections > 2) then
+                dbms_output.put_line('Instructor ' || person.id || ' needs a vacation');
+            else
+                dbms_output.put_line('Instructor ' || person.id || ' teaches ' || person.sections);
+            end if;
+        end loop;
+    end instructor_status;
+    procedure remove_student(lookup student.id%type) is
+    begin
+        Select count(*) into count_helper from student where id = lookup;
+        if count_helper > 0 then
+            Delete from student where id = lookup;
+        else
+            dbms_output.put_line('Student not found');
+        end if;
+    end remove_student;
+end school_api;
+/
+Begin
+    school_api.remove_student(10);
+End;
+/
+```
+
