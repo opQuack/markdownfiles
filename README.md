@@ -1,3 +1,6 @@
+# DBMS Assignment 5
+
+### Table Creation Commands
 ```
 Create table student(
     id INTEGER PRIMARY KEY,
@@ -33,12 +36,15 @@ Insert into instructor values( 3 ,' Thacher ',' Page ',' 3 ' );
 Insert into instructor values( 4 ,' Susi ',' Jiroutka ',' 2 ' );
 ```
 
+## Queries
 
+### Question 1
 ```
 create or replace package school_api is
     procedure get_address(table_name IN varchar, lookup student.id%type);
     procedure instructor_status;
 end school_api;
+/
 
 create or replace package body school_api is
     procedure get_address(table_name IN varchar, lookup student.id%type) is
@@ -60,5 +66,6 @@ create or replace package body school_api is
         end loop;
     end instructor_status;
 end school_api;
+/
 ```
 
